@@ -5,7 +5,7 @@
     indeterminate-icon="$vcsCheckboxIndeterminate"
     v-bind="{...$props, ...$attrs}"
     :value="value"
-    @change="emit"
+    @change="$emit('input', !!$event)"
   />
 </template>
 
@@ -37,11 +37,6 @@
       value: {
         type: Boolean,
         default: false,
-      },
-    },
-    methods: {
-      emit(val) {
-        this.$emit('input', val);
       },
     },
   });

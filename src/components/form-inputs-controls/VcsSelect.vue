@@ -9,7 +9,7 @@
     dense
     solo
     flat
-    @input="$emit('input', value)"
+    @input="$emit('input', $event)"
     :style="{ width: `${width}px`, maxWidth: `${width}px` }"
     :height="height"
     v-bind="{...$props, ...$attrs}"

@@ -27,6 +27,7 @@
             'input--degrees': unit === 'deg',
           }"
           v-bind="{...$props, ...$attrs, label: useNativeLabel ? $props.label : undefined}"
+          @input="$emit('input', $event)"
         />
       </div>
     </slot>
