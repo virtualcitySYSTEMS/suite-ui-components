@@ -1,6 +1,6 @@
 {
   "name": "@vcsuite/ui-components",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Vuetify based UI components.",
   "main": "index.js",
   "module": "index.js",
@@ -29,13 +29,23 @@
     "uuid": "^8.3.2"
   },
   "eslintConfig": {
-    "extends": ["@vcsuite/eslint-config/vue"],
-    "plugins": ["jsdoc","vue"],
+    "extends": [
+      "@vcsuite/eslint-config/vue"
+    ],
+    "plugins": [
+      "jsdoc",
+      "vue"
+    ],
     "rules": {
       "jsdoc/check-tag-names": [
         "error",
         {
-          "definedTags": ["vue-prop", "vue-data", "vue-computed", "vue-event"]
+          "definedTags": [
+            "vue-prop",
+            "vue-data",
+            "vue-computed",
+            "vue-event"
+          ]
         }
       ]
     }
