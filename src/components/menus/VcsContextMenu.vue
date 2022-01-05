@@ -124,7 +124,7 @@
    *     v-if="clickEvent"
    *     :click-event="clickEvent"
    *     :options="options"
-   *     @menu-closed="clickEvent = undefined"
+   *     v-on:menu-closed="clickEvent = undefined"
    *   >
    */
   export default Vue.extend({

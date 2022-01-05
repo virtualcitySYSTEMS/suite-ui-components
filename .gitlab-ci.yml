@@ -1,0 +1,81 @@
+default:
+  image: gitlab.virtualcitysystems.de:5050/vcsuite/devops/gitlabrunner/node:16
+
+variables:
+  GIT_CLONE_PATH: $CI_BUILDS_DIR/$CI_PROJECT_PATH_SLUG/$CI_COMMIT_REF_SLUG
+  GIT_STRATEGY: fetch
+
+stages:
+  - build
+  - test
+  - version
+  - publish
+
+.template: &job_definition
+  tags:
+    - linux-2.0
+
+build:
+  <<: *job_definition
+  script:
+    - npm set registry 'http://npmregistry:4873'
+    - npm ci
+  stage: build
+
+.after_build_template: &after_build_definition
+  <<: *job_definition
+  variables:
+    GIT_STRATEGY: none
+
+lint:
+  <<: *after_build_definition
+  stage: test
+  script:
+    - npm run lint
+
+audit:
+  <<: *after_build_definition
+  stage: test
+  script:
+    - npm audit --production --audit-level=moderate
+
+#test:
+#  <<: *after_build_definition
+#  stage: test
+#  script:
+#    - npm run test
+
+version:
+  <<: *after_build_definition
+  only:
+    refs:
+      - main
+    variables:
+      - $PUBLISH
+  stage: version
+  script:
+    - npm version patch -m "%s [skip-ci]"
+    - TAG=`git describe --abbrev=0`
+    - git push git@gitlab:vcsuite/npm/vcsuite/uicomponents.git $TAG
+    - git push git@gitlab:vcsuite/npm/vcsuite/uicomponents HEAD:$CI_COMMIT_REF_NAME
+  before_script:
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_RUNNER_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan gitlab >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - git config user.name "Gitlab Runner"
+    - git config user.email "gitlab-runner@vc.systems"
+
+publish:
+  <<: *after_build_definition
+  stage: publish
+  only:
+    refs:
+      - main
+    variables:
+      - $PUBLISH
+  script:
+    - npm config set '//npmregistry:4873/:_authToken' "${VERDACCIO_TOKEN}"
+    - npm publish --registry http://npmregistry:4873

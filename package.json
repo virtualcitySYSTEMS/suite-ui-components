@@ -5,29 +5,40 @@
   "main": "index.js",
   "module": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint \"{src,tests}/**/*.{js,vue}\""
   },
-  "dependencies": {
+  "peerDependencies": {
     "@mdi/font": "^5.9.55",
     "@vue/composition-api": "^1.3.3",
-    "vue": "^2.6.11",
-    "sortablejs": "^1.13.0",
-    "vuetify": "^2.5.3",
-    "vuedraggable": "^2.24.3",
-    "vuetify-draggable-treeview": "^0.0.6",
-    "rxjs": "^6.6.6",
     "fuse.js": "^6.4.6",
-    "vue-click-outside": "^1.1.0"
+    "rxjs": "^6.6.6",
+    "sortablejs": "^1.13.0",
+    "vue": "^2.6.11",
+    "vue-click-outside": "^1.1.0",
+    "vuedraggable": "^2.24.3",
+    "vuetify": "^2.5.3",
+    "vuetify-draggable-treeview": "^0.0.6"
   },
   "devDependencies": {
     "@vcsuite/eslint-config": "^2.0.3",
+    "@vue/compiler-sfc": "^3.2.26",
     "eslint": "^8.1.0",
+    "jsdoc": "^3.6.7",
+    "jsdoc-vuejs": "^4.0.0",
     "uuid": "^8.3.2"
   },
   "eslintConfig": {
-    "extends": [
-      "@vcsuite/eslint-config/vue"
-    ]
+    "extends": ["@vcsuite/eslint-config/vue"],
+    "plugins": ["jsdoc","vue"],
+    "rules": {
+      "jsdoc/check-tag-names": [
+        "error",
+        {
+          "definedTags": ["vue-prop", "vue-data", "vue-computed", "vue-event"]
+        }
+      ]
+    }
   },
   "eslintIgnore": [
     "node_modules"
