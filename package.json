@@ -6,7 +6,8 @@
   "module": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint \"{src,tests}/**/*.{js,vue}\""
+    "lint": "eslint \"{src,tests}/**/*.{js,vue}\"",
+    "docs": "jsdoc -c build/jsdocConfig.json"
   },
   "peerDependencies": {
     "@mdi/font": "^5.9.55",
