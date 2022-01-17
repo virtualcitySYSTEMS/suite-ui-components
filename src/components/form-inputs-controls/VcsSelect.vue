@@ -26,10 +26,12 @@
   import Vue from 'vue';
 
   /**
-   * @description Stylized wrapper around vuetify select
+   * @description Stylized wrapper around vuetify select. extends API of https://vuetifyjs.com/en/api/v-select/
    * @vue-prop  {Array}  items         - Array of strings for selection
    * @vue-prop  {Array}  customClasses - Array of css classes being applied to select element
    * @vue-prop  {string} value         - Selected value
+   * @vue-prop  {number} width         - Sets the width of the input
+   * @vue-prop  {number} height        - Sets the height of the input
    * @vue-event {string} input         - Emit selected value
    */
   export default Vue.extend({
