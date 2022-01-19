@@ -107,7 +107,8 @@
 
 <script>
   import Vue from 'vue';
-  import ClickOutside from 'vue-click-outside';
+  // TODO check if dependency is required (issue #14)
+  // import ClickOutside from 'vue-click-outside';
 
   /**
    * @description
@@ -129,7 +130,7 @@
    */
   export default Vue.extend({
     name: 'VcsContextMenu',
-    directives: { ClickOutside },
+    // directives: { ClickOutside },
     props: {
       options: {
         type: Array,
