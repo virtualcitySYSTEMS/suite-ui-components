@@ -1,6 +1,6 @@
 {
   "name": "@vcsuite/ui-components",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "type": "module",
   "description": "Vuetify based UI components.",
   "main": "index.js",
