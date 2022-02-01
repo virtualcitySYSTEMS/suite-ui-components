@@ -13,12 +13,11 @@
     >
       <template #activator="{ on, attrs }">
         <v-btn
-          :color="!!value ? 'primary' : null"
-          :text="!value ? true : null"
-          :elevation="elevation"
-          @click="onClick"
+          :color="backgroundColor"
+          :text="isTextButton"
+          @click="$emit('click', $event)"
           class="ma-1 px-2"
-          v-bind="attrs"
+          v-bind="{...$attrs, attrs}"
           v-on="on"
         >
           <v-icon v-if="icon" v-text="icon" :class="{ 'mr-2': hasDefaultSlot }" />
@@ -29,11 +28,11 @@
     </v-tooltip>
     <v-btn
       v-else
-      :color="!!value ? 'primary' : null"
-      :text="!value ? true : null"
-      :elevation="elevation"
-      @click="onClick"
+      :color="backgroundColor"
+      :text="isTextButton"
+      @click="$emit('click', $event)"
       class="ma-1 px-2"
+      v-bind="{...$attrs}"
     >
       <v-icon v-if="icon" v-text="icon" :class="{ 'mr-2': hasDefaultSlot }" />
       <slot />
@@ -65,17 +64,16 @@
   import Badge from '../notification/VcsBadge.vue';
 
   /**
-   * @description Customizable button component.
-   * @vue-prop {boolean}                                toggleable - Whether the button color is being toggled by clicking on it.
-   * @vue-prop {string}                                 color - Any of the theme colors.
+   * @description a button with tooltip extending {@link https://vuetifyjs.com/en/api/v-btn/|vuetify v-btn} using
+   * {@link https://vuetifyjs.com/en/api/v-tooltip/|vuetify v-tooltip}.
+   * @vue-prop {boolean}                                isActive - Whether button has background color. Applies vuetify primary color if color property is not set.
    * @vue-prop {string}                                 tooltip - Text content of a tooltip which appears on hover.
    * @vue-prop {('bottom' | 'left' | 'top' | 'right')}  tooltipPosition - Position of the tooltip.
-   * @vue-prop {boolean}                                value - When true, will have the primary color as background.
    * @vue-prop {boolean}                                hasUpdate - Whether the button shows a badge in the top right.
-   * @vue-prop {string}                                 icon - When given, will display an icon in the button.
-   * @vue-prop {number}                                 elevation - Vuetify shadow, possible values: 0-9
+   * @vue-prop {string}                                 icon - When given, will display an icon in the button. Replaces vuetify icon property.
    * @vue-prop {Array}                                  customClasses - Array of strings which will be added as classes.
-   * @vue-event {boolean}                               input - Emits when the button is clicked.
+   * @vue-prop {string}                                 color - Passes poperty to v-btn in case prop isActive is true.
+   * @vue-event {MouseEvent}                            click - Emits click event when the button is clicked.
    */
   export default Vue.extend({
     name: 'VcsButton',
@@ -93,9 +91,19 @@
       hasDefaultSlot() {
         return !!this.$slots.default && !!this.$slots.default[0].text.trim();
       },
+      backgroundColor() {
+        if (this.isActive) {
+          return this.color ? this.color : 'primary';
+        } else {
+          return null;
+        }
+      },
+      isTextButton() {
+        return !this.isActive ? true : null;
+      },
     },
     props: {
-      toggleable: {
+      isActive: {
         type: Boolean,
         default: false,
       },
@@ -107,10 +115,6 @@
         type: String,
         default: 'bottom',
       },
-      value: {
-        type: Boolean,
-        default: false,
-      },
       hasUpdate: {
         type: Boolean,
         default: false,
@@ -119,19 +123,13 @@
         type: String,
         default: undefined,
       },
-      elevation: {
-        type: Number,
-        default: 0,
-      },
       customClasses: {
         type: Array,
         default: () => ([]),
       },
-    },
-    methods: {
-      onClick() {
-        const isActive = this.toggleable ? !this.value : this.value;
-        this.$emit('input', isActive);
+      color: {
+        type: String,
+        default: undefined,
       },
     },
   });
