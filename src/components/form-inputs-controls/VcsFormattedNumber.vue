@@ -1,39 +1,54 @@
 <template>
   <span>
-    {{ value | localeString({ fractionDigits }) }}
-
-    <span v-if="unit === 'm'">
-      m
-    </span>
-    <span v-if="unit === 'sqm'">
+    {{ formatted }}
+    <span v-if="unit === SpecialUnits.SQM">
       m<sup>2</sup>
     </span>
-    <span v-if="unit === 'cm'">
+    <span v-else-if="unit === SpecialUnits.CBM">
       m<sup>3</sup>
     </span>
-    <span v-if="unit === 'deg'">
+    <span v-else-if="unit === SpecialUnits.DEG">
       °
+    </span>
+    <span v-else>
+      {{ unit }}
     </span>
   </span>
 </template>
 
 <script>
   import Vue from 'vue';
+  import { computed } from '@vue/composition-api';
+  import { numberToLocaleString } from '../../filters/index.js';
 
-  export const units = [
-    'number',
-    'm',
-    'sqm',
-    'cm',
-    'deg',
-  ];
+  /**
+   * Enumeration of units displayed with special symbol
+   * @typedef {Object} VcsFormattedNumber.SpecialUnits
+   * @enum {string}
+   * @property {string} SQM square meters
+   * @property {string} CBM cubic meters
+   * @property {string} DEG degrees
+   * @module VcsFormattedNumber
+   */
+  export const SpecialUnits = {
+    SQM: 'sqm',
+    CBM: 'cbm',
+    DEG: 'deg',
+  };
 
+  /**
+   * @description Formatted number display, optionally with unit
+   * @vue-prop {string|SpecialUnits} [unit=undefined]
+   * @vue-prop {number} [fractionDigits=undefined]
+   * @vue-prop {number} value
+   * @vue-computed {string} formatted - value formatted to locale string
+   */
   export default Vue.extend({
     name: 'VcsFormattedNumber',
     props: {
       unit: {
-        type: String,
-        default: 'number', // 'm', 'sqm', 'cm', 'deg' ...
+        type: [String || SpecialUnits],
+        default: undefined,
       },
       fractionDigits: {
         type: Number,
@@ -43,6 +58,13 @@
         type: Number,
         default: 0,
       },
+    },
+    setup(props) {
+      const formatted = computed(() => numberToLocaleString(props.value, props.fractionDigits));
+      return {
+        SpecialUnits,
+        formatted,
+      };
     },
   });
 </script>

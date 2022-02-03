@@ -1,4 +1,5 @@
 export { default as Icons } from './src/icons/+all.js';
+export { default as Filters } from './src/filters/index.js';
 
 export { default as VcsAddSubtractButtons } from './src/components/buttons/VcsAddSubtractButtons.vue';
 export { default as VcsButton } from './src/components/buttons/VcsButton.vue';
