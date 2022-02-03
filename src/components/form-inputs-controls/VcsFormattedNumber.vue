@@ -19,7 +19,7 @@
 <script>
   import Vue from 'vue';
   import { computed } from '@vue/composition-api';
-  import { numberToLocaleString } from '../../filters/index.js';
+  import { numberToLocaleString } from '../../filters/locale-string.filter.js';
 
   /**
    * Enumeration of units displayed with special symbol
