@@ -13,7 +13,10 @@ function numberToLocaleString(value, fractionDigits) {
   }
 
   return (/** @type {number} */ value)
-    .toLocaleString(navigator.language, { maximumFractionDigits: fractionDigits });
+    .toLocaleString(navigator.language, {
+      minimumFractionDigits: fractionDigits,
+      maximumFractionDigits: fractionDigits,
+    });
 }
 
 // eslint-disable-next-line import/prefer-default-export
