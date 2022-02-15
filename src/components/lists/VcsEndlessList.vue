@@ -36,7 +36,7 @@
 <script>
   import Vue from 'vue';
   import Fuse from 'fuse.js';
-  import VcsTreeviewSearchbar from '../treeview/VcsTreeviewSearchbar.vue';
+  import VcsTreeviewSearchbar from './VcsTreeviewSearchbar.vue';
 
 
   // https://fusejs.io/api/options.html
