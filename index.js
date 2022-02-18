@@ -17,6 +17,7 @@ export { default as VcsTextField } from './src/components/form-inputs-controls/V
 
 export { default as VcsFormattedNumber } from './src/components/form-output/VcsFormattedNumber.vue';
 
+export { default as VcsActionButtonList } from './src/components/lists/VcsActionButtonList.vue';
 // export { default as VcsEndlessList } from './src/components/lists/VcsEndlessList.vue';
 export { default as VcsTreeview } from './src/components/lists/VcsTreeview.vue';
 export { default as VcsTreeviewLeaf } from './src/components/lists/VcsTreeviewLeaf.vue';
