@@ -5,7 +5,9 @@
   "description": "Vuetify based UI components.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "coverage:gitlab": "vitest run --coverage --reporter junit --outputFile test-report.xml",
     "lint": "eslint \"{src,tests}/**/*.{js,vue}\"",
     "docs": "jsdoc -c build/jsdocConfig.json"
   },
@@ -14,30 +16,35 @@
     "src/"
   ],
   "peerDependencies": {
-    "@vcsuite/logger": "^1.0.1",
-    "@vcsuite/check": "^1.1.1",
     "@mdi/font": "^5.9.55",
+    "@vcsuite/check": "^1.1.1",
+    "@vcsuite/logger": "^1.0.1",
     "@vue/composition-api": "^1.3.3",
     "fuse.js": "^6.4.6",
     "rxjs": "^6.6.6",
-    "vue": "^2.6.11",
-    "vuetify": "^2.5.3"
+    "vue": "^2.6.14",
+    "vuetify": "^2.6.3"
   },
   "devDependencies": {
-    "@vcsuite/eslint-config": "^2.0.3",
+    "@vcsuite/eslint-config": "^2.1.1",
     "@vue/compiler-sfc": "^3.2.26",
-    "eslint": "^8.1.0",
+    "@vue/test-utils": "^1.3.0",
+    "c8": "^7.11.0",
+    "eslint": "^8.9.0",
     "jsdoc": "^3.6.7",
     "jsdoc-vuejs": "^4.0.0",
-    "uuid": "^8.3.2"
+    "jsdom": "^19.0.0",
+    "sass": "1.32.13",
+    "unplugin-vue-components": "^0.17.18",
+    "vite": "^2.8.4",
+    "vite-plugin-vue2": "^1.9.3",
+    "vitest": "^0.4.1",
+    "vue": "^2.6.14",
+    "vuetify": "^2.6.3"
   },
   "eslintConfig": {
     "extends": [
       "@vcsuite/eslint-config/vue"
-    ],
-    "plugins": [
-      "jsdoc",
-      "vue"
     ],
     "rules": {
       "jsdoc/check-tag-names": [

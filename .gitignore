@@ -2,3 +2,5 @@
 node_modules
 docs
 /*.tgz
+coverage/
+test-report.xml

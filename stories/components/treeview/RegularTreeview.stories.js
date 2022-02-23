@@ -1,6 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { v4 as uuid } from 'uuid';
 import { VcsTreeview, VcsTreeviewLeaf } from '../../../index.js';
+
+let id;
+function uuid() {
+  id += 1;
+  return `id-${id}`;
+}
 
 export default {
   title: 'Treeview/Regular',

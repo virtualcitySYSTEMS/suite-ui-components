@@ -1,5 +1,5 @@
 default:
-  image: gitlab.virtualcitysystems.de:5050/vcsuite/devops/gitlabrunner/node:16
+  image: gitlab.virtualcitysystems.de:5050/vcsuite/devops/gitlabrunner/node:16-bullseye
 
 variables:
   GIT_CLONE_PATH: $CI_BUILDS_DIR/$CI_PROJECT_PATH_SLUG/$CI_COMMIT_REF_SLUG
@@ -39,11 +39,15 @@ audit:
   script:
     - npm audit --production --audit-level=moderate
 
-#test:
-#  <<: *after_build_definition
-#  stage: test
-#  script:
-#    - npm run test
+test:
+  <<: *after_build_definition
+  stage: test
+  script:
+    - npm run coverage:gitlab
+  coverage: '/^Statements\s*:\s*([^%]+)/'
+  artifacts:
+    reports:
+      junit: test-report.xml
 
 version:
   <<: *after_build_definition
