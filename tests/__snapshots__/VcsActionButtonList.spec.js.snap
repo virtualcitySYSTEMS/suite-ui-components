@@ -1,0 +1,18 @@
+// Vitest Snapshot v1
+
+exports[`VcsActionButtonList > should mount 1`] = `
+"<div>
+  <div data-v-4027582a=\\"\\" class=\\"d-inline-block vcs-button-wrap pa-0\\"><button data-v-4027582a=\\"\\" type=\\"button\\" class=\\"v-btn v-btn--text theme--light v-size--default vcs-button--standard padding font-weight-bold\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\"><span class=\\"v-btn__content\\"><i data-v-4027582a=\\"\\" aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--light\\">$vcsIcon</i></span></button><span data-v-62384dbb=\\"\\" data-v-4027582a=\\"\\" class=\\"v-tooltip v-tooltip--bottom\\" tooltipposition=\\"bottom\\"><!----></span>
+    <!---->
+  </div>
+  <div data-v-4027582a=\\"\\" class=\\"d-inline-block vcs-button-wrap pa-0\\"><button data-v-4027582a=\\"\\" type=\\"button\\" class=\\"v-btn v-btn--text theme--light v-size--default vcs-button--standard padding font-weight-bold\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\"><span class=\\"v-btn__content\\"><i data-v-4027582a=\\"\\" aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--light\\">$vcsIcon2</i></span></button><span data-v-62384dbb=\\"\\" data-v-4027582a=\\"\\" class=\\"v-tooltip v-tooltip--bottom\\" tooltipposition=\\"bottom\\"><!----></span>
+    <!---->
+  </div>
+  <div class=\\"v-menu\\">
+    <!---->
+  </div>
+  <div data-v-4027582a=\\"\\" class=\\"d-inline-block vcs-button-wrap vcs-overflow-btn\\"><button data-v-4027582a=\\"\\" type=\\"button\\" class=\\"v-btn v-btn--text theme--light v-size--default vcs-button--standard padding font-weight-bold\\" role=\\"button\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\"><span class=\\"v-btn__content\\"><!----><i aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--light\\">$vcsKebab</i></span></button><span data-v-62384dbb=\\"\\" data-v-4027582a=\\"\\" class=\\"v-tooltip v-tooltip--bottom\\" tooltipposition=\\"bottom\\"><!----></span>
+    <!---->
+  </div>
+</div>"
+`;

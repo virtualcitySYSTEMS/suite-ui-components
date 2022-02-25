@@ -6,7 +6,7 @@
           <strong class="caption">{{ title }}</strong>
           <VcsActionButtonList
             :actions="titleActions"
-            button-class="menu"
+            small
           />
         </div>
       </article>
@@ -20,7 +20,7 @@
 
 <script>
   import Vue from 'vue';
-  import VcsActionButtonList from '../lists/VcsActionButtonList.vue';
+  import VcsActionButtonList from '../buttons/VcsActionButtonList.vue';
 
   /**
    * @description

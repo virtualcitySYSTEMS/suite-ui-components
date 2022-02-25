@@ -3,6 +3,8 @@ export { default as Icons } from './src/icons/+all.js';
 export { numberToLocaleString } from './src/filters/locale-string.filter.js';
 
 export { default as VcsButton } from './src/components/buttons/VcsButton.vue';
+export { default as VcsActionButtonList } from './src/components/buttons/VcsActionButtonList.vue';
+export { default as VcsTooltip } from './src/components/buttons/VcsTooltip.vue';
 
 // export { default as VcsConfirmationDialog } from './src/components/dialogs/VcsConfirmationDialog.vue';
 
@@ -17,7 +19,7 @@ export { default as VcsTextField } from './src/components/form-inputs-controls/V
 
 export { default as VcsFormattedNumber } from './src/components/form-output/VcsFormattedNumber.vue';
 
-export { default as VcsActionButtonList } from './src/components/lists/VcsActionButtonList.vue';
+export { default as VcsActionList } from './src/components/lists/VcsActionList.vue';
 // export { default as VcsEndlessList } from './src/components/lists/VcsEndlessList.vue';
 export { default as VcsTreeview } from './src/components/lists/VcsTreeview.vue';
 export { default as VcsTreeviewLeaf } from './src/components/lists/VcsTreeviewLeaf.vue';
