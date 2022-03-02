@@ -7,7 +7,6 @@
       :icon="button.icon"
       :active="button.active"
       @click="button.callback($event)"
-      class="pa-0"
       v-bind="{...$attrs}"
     />
     <v-menu
@@ -30,7 +29,6 @@
   </div>
 </template>
 <style lang="scss">
-
 .vcs-overflow-menu-wrap{
   margin-left: 13px;
 }

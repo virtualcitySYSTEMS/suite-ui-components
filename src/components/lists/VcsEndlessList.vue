@@ -35,20 +35,7 @@
 
 <script>
   import Vue from 'vue';
-  import Fuse from 'fuse.js';
   import VcsTreeviewSearchbar from './VcsTreeviewSearchbar.vue';
-
-
-  // https://fusejs.io/api/options.html
-  const options = {
-    keys: [
-      'name',
-      'title',
-      'children.name',
-      'children.actions.title',
-      'children.children.name',
-    ],
-  };
 
   /**
    * @description
@@ -71,9 +58,6 @@
       percentLoaded() {
         return (this.itemsLoaded / this.itemsTotal) * 100;
       },
-    },
-    mounted() {
-      this.fuse = new Fuse(this.items, options);
     },
     components: { VcsTreeviewSearchbar },
     props: {
@@ -114,10 +98,8 @@
       },
     },
     methods: {
-      filter(val = '') {
-        this.filteredSearch = this.fuse
-          .search(val)
-          .map(({ item }) => { return item; });
+      filter() {
+
       },
     },
     data() {

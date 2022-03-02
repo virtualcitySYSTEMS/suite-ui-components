@@ -145,6 +145,7 @@
       classes() {
         return {
           'vcs-button--small': this.isSmall,
+          'pa-1': this.isSmall,
           'vcs-button--standard': this.isStandard,
           padding: this.isStandard,
           'font-weight-bold': this.isStandard,
