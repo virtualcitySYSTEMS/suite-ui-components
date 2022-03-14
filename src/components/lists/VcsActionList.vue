@@ -2,32 +2,30 @@
   <v-list
     v-if="actions.length > 0"
   >
-    <v-list-item-group multiple>
-      <v-list-item
-        v-for="action in actions"
-        :key="action.name"
-        :input-value="action.active"
-        color="primary"
+    <v-list-item
+      v-for="action in actions"
+      :key="action.name"
+      :input-value="action.active"
+      active-class="text-active"
+      color="primary"
+      @click="action.callback($event)"
+    >
+      <VcsTooltip
+        :tooltip="action.title"
+        :tooltip-position="tooltipPosition"
+        v-bind="{...tooltipProps}"
       >
-        <VcsTooltip
-          :tooltip="action.title"
-          :tooltip-position="tooltipPosition"
-          v-bind="{...tooltipProps}"
-        >
-          <template #activator="{ on, attrs }">
-            <v-list-item-content
-              :active="action.active"
-              @click="action.callback($event)"
-              class="vcs-action-list"
-              v-bind="{...$attrs, ...attrs}"
-              v-on="{...$listeners, ...on}"
-            >
-              <v-list-item-title v-text="action.name" />
-            </v-list-item-content>
-          </template>
-        </VcsTooltip>
-      </v-list-item>
-    </v-list-item-group>
+        <template #activator="{ on, attrs }">
+          <v-list-item-content
+            class="vcs-action-list"
+            v-bind="{...$attrs, ...attrs}"
+            v-on="{...$listeners, ...on}"
+          >
+            <v-list-item-title v-text="action.name" />
+          </v-list-item-content>
+        </template>
+      </VcsTooltip>
+    </v-list-item>
   </v-list>
 </template>
 <style lang="scss">
@@ -36,6 +34,9 @@
   &:hover{
     color: var(--v-primary-base);
   }
+}
+.v-list-item--active.text-active::before {
+  opacity: 0;
 }
 </style>
 <script>
