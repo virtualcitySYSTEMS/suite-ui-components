@@ -4,7 +4,7 @@
 
 <style lang="scss" scoped>
   .v-application .badge {
-    border: 1px solid white !important;
+    border: 1px solid var(--v-basic-base) !important;
   }
 </style>
 

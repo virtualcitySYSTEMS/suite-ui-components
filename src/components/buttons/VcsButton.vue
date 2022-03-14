@@ -13,6 +13,8 @@
           :text="isTextButton"
           :outlined="isOutlined"
           :class="classes"
+          :ripple="!isSmall"
+          elevation="0"
           v-bind="{...$attrs, ...attrs}"
           v-on="{...$listeners, ...on}"
         >
@@ -32,44 +34,57 @@
 <style lang="scss" scoped>
   .vcs-button-wrap{
     position: relative;
+    padding: 3px;
   }
   .v-btn{
-    &.vcs-button--standard {
-      min-width: 48px;
-      height: 40px;
-      position: relative;
+    border: 1px solid transparent;
+    &--outlined{
+      border: thin solid currentColor;
     }
+    &.vcs-button{
 
-    &.vcs-button--small {
-      height: 16px;
-      min-width: auto;
-      &:hover{
-        color: var(--v-primary-base);
+      &--standard {
+        min-width: 48px;
+        height: 32px;
+        font-size: 12px;
+        &:hover{
+          color: var(--v-accent-lighten5) !important;
+          border-color: var(--v-primary-base);
+          background-color: var(--v-primary-base);
+        }
       }
-      &::before{
-        display: none; /*prevents unwanted mouseover effect*/
-      }
-      ::v-deep {
+
+      &--small {
+        height: 16px;
+        min-width: auto;
+        &:hover{
+          color: var(--v-primary-base);
+        }
+        &::before{
+          display: none; /*prevents unwanted mouseover effect*/
+        }
+        ::v-deep {
           .v-icon{
             font-size: 16px;
           }
 
-        .v-icon__component {
-          height: 16px;
-          width: 16px;
+          .v-icon__component {
+            height: 16px;
+            width: 16px;
+          }
         }
       }
-    }
 
-    &.vcs-button--large {
-      min-width: 48px;
-      height: 40px;
-      position: relative;
-    }
+      &--large {
+        min-width: 42px;
+        height: 34px;
+        padding: 0;
+        position: relative;
 
-    &.vcs-button--active-disabled{
-      border-radius: 4px;
-      border: 3px solid var(--v-primary-base);
+        &.vcs-button--active-disabled{
+          border: 2px solid var(--v-primary-base);
+        }
+      }
     }
   }
 </style>
@@ -145,10 +160,11 @@
       classes() {
         return {
           'vcs-button--small': this.isSmall,
-          'pa-1': this.isSmall,
+          'pa-0': this.isSmall,
           'vcs-button--standard': this.isStandard,
           padding: this.isStandard,
           'font-weight-bold': this.isStandard,
+          'text-capitalize': this.isStandard,
           'vcs-button--large': this.isLarge,
           'vcs-button--active-disabled': this.active && this.$attrs.disabled,
         };
