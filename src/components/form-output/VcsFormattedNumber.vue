@@ -17,7 +17,6 @@
 </template>
 
 <script>
-  import Vue from 'vue';
   import { computed } from '@vue/composition-api';
   import { numberToLocaleString } from '../../filters/locale-string.filter.js';
 
@@ -43,7 +42,7 @@
    * @vue-prop {number} value
    * @vue-computed {string} formatted - value formatted to locale string
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsFormattedNumber',
     props: {
       unit: {
@@ -66,5 +65,5 @@
         formatted,
       };
     },
-  });
+  };
 </script>

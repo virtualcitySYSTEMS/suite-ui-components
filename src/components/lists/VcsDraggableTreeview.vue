@@ -134,7 +134,6 @@
 <script>
 
 
-  import Vue from 'vue';
   // TODO check if dependency is required (issue #15)
   // import 'sortablejs/Sortable.min';
   // import VuetifyDraggableTreeview from 'vuetify-draggable-treeview';
@@ -143,7 +142,7 @@
    * @description
    * Extends https://github.com/suusan2go/vuetify-draggable-treeview
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsDraggableTreeview',
     components: {
       // VuetifyDraggableTreeview,
@@ -159,5 +158,5 @@
         localItems: [...props.items],
       };
     },
-  });
+  };
 </script>

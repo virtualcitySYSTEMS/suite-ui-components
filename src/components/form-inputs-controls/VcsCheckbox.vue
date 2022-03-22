@@ -24,14 +24,13 @@
 </style>
 
 <script>
-  import Vue from 'vue';
 
   /**
    * @description Stylized wrapper around vuetify checkbox. extends API of https://vuetifyjs.com/en/api/v-checkbox/
    * @vue-prop {boolean}   value - Value of the checkbox.
    * @vue-event {boolean}  input - Emits when the value of the checkbox changes.
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsCheckbox',
     props: {
       value: {
@@ -39,5 +38,5 @@
         default: false,
       },
     },
-  });
+  };
 </script>

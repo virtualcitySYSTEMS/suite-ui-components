@@ -59,7 +59,6 @@
 
 
 <script>
-  import Vue from 'vue';
 
   /**
    * @description extends API of {@link https://vuetifyjs.com/en/api/v-text-field/|vuetify v-text-field}
@@ -67,7 +66,7 @@
    * @vue-data {slot} [#input] - slot to override input
    * @vue-event {InputEvent} input - text emitted on input
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsTextField',
     props: {
       customClasses: {
@@ -75,5 +74,5 @@
         default: () => ([]),
       },
     },
-  });
+  };
 </script>

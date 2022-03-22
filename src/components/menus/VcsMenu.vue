@@ -101,7 +101,6 @@
 </style>
 
 <script>
-  import Vue from 'vue';
 
   /**
    *
@@ -127,7 +126,7 @@
    * @vue-prop {MenuItem[]} items - Menuitems to be shown
    * @vue-prop {string} icon      - Icon to used to activate menu.
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsMenu',
     props: {
       items: {
@@ -139,5 +138,5 @@
         default: undefined,
       },
     },
-  });
+  };
 </script>

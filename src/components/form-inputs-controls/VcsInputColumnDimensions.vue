@@ -38,12 +38,11 @@
 </template>
 
 <script>
-  import Vue from 'vue';
   import TextField from './VcsTextField.vue';
 
-  export default Vue.extend({
+  export default {
     components: {
       TextField,
     },
-  });
+  };
 </script>

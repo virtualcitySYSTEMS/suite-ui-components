@@ -90,7 +90,6 @@
 </style>
 
 <script>
-  import Vue from 'vue';
   import VcsBadge from '../notification/VcsBadge.vue';
   import VcsTooltip from './VcsTooltip.vue';
 
@@ -113,7 +112,7 @@
    * @vue-computed {boolean}                            isTextButton - button is text
    * @vue-event {MouseEvent}                            click - Emits click event when the button is clicked.
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsButton',
     components: { VcsTooltip, VcsBadge },
     inheritAttrs: false,
@@ -194,5 +193,5 @@
         return !this.active ? true : null;
       },
     },
-  });
+  };
 </script>

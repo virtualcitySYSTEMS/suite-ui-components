@@ -23,14 +23,13 @@
 
 
 <script>
-  import Vue from 'vue';
 
   /**
    * @description Stylized wrapper around vuetify checkbox
    * @vue-prop {boolean}   value - Value of the checkbox.
    * @vue-event {boolean}  input - Emits when the value of the checkbox changes.
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsMinimalCheckbox',
     props: {
       value: {
@@ -43,5 +42,5 @@
         this.$emit('input', val);
       },
     },
-  });
+  };
 </script>

@@ -207,7 +207,7 @@
    * @vue-event {string[]} value              - List of ids of selected items
    * @vue-event {string[]} open               - List of ids of open items
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsTreeview',
     components: { VcsTreeviewSearchbar },
     props: {
@@ -319,6 +319,6 @@
         _open,
       };
     },
-  });
+  };
 </script>
 

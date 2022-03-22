@@ -23,7 +23,6 @@
   }
 </style>
 <script>
-  import Vue from 'vue';
 
   /**
    * @description Stylized wrapper around vuetify select. extends API of https://vuetifyjs.com/en/api/v-select/
@@ -34,7 +33,7 @@
    * @vue-prop  {number} height        - Sets the height of the input
    * @vue-event {string} input         - Emit selected value
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsSelect',
     props: {
       items: {
@@ -59,6 +58,6 @@
         default: 32,
       },
     },
-  });
+  };
 </script>
 

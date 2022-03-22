@@ -26,7 +26,6 @@
 
 <script>
   import {
-    defineComponent,
     onMounted,
     onUnmounted,
   } from '@vue/composition-api';
@@ -37,7 +36,7 @@
    * @description
    * Stylized wrapper around vuetify Color Picker
    */
-  export default defineComponent({
+  export default {
     name: 'VcsColorPicker',
     props: {
       width: {
@@ -78,5 +77,5 @@
         sub$,
       };
     },
-  });
+  };
 </script>

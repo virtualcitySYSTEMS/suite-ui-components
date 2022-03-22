@@ -104,7 +104,7 @@
 
 
 <script>
-  import { defineComponent, onMounted, onUnmounted } from '@vue/composition-api';
+  import { onMounted, onUnmounted } from '@vue/composition-api';
 
   import { Subject } from 'rxjs';
   import { debounceTime } from 'rxjs/operators';
@@ -114,7 +114,7 @@
    * @description Stylized wrapper around vuetify divider
    * @vue-prop {number}   height - Height of the component.
    */
-  export default defineComponent({
+  export default {
     name: 'VcsTreeviewSearchbar',
     props: {
       placeholder: {
@@ -152,5 +152,5 @@
         },
       };
     },
-  });
+  };
 </script>

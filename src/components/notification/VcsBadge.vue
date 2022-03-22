@@ -10,13 +10,12 @@
 
 
 <script>
-  import Vue from 'vue';
 
   /**
    * @description UI component representing a circular indicator.
    * @vue-prop {string} color - any of the theme colors.
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsBadge',
     props: {
       color: {
@@ -24,5 +23,5 @@
         default: 'warning',
       },
     },
-  });
+  };
 </script>

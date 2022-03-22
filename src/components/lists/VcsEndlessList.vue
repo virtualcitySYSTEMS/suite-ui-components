@@ -34,7 +34,6 @@
 </template>
 
 <script>
-  import Vue from 'vue';
   import VcsTreeviewSearchbar from './VcsTreeviewSearchbar.vue';
 
   /**
@@ -49,7 +48,7 @@
    * @vue-prop {number}   itemsDisplayed - Number of items which should be displayed at once. Multiply this with itemHeight to get height of this list.
    * @vue-prop {boolean}  hasSearchbar - Whether the search bar should be displayed.
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsEndlessList',
     computed: {
       height() {
@@ -108,5 +107,5 @@
         searchVal: undefined,
       };
     },
-  });
+  };
 </script>

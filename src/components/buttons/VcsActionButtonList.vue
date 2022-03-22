@@ -34,7 +34,7 @@
 }
 </style>
 <script>
-  import Vue from 'vue';
+
   import VcsButton from './VcsButton.vue';
   import VcsActionList, { validateActions } from '../lists/VcsActionList.vue';
 
@@ -48,7 +48,7 @@
    * @vue-computed {Array<VcsAction>} buttons - buttons rendered directly, have to provide an icon
    * @vue-computed {Array<VcsAction>} overflowButtons - rest of buttons rendered in overflow
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsActionButtonList',
     components: { VcsActionList, VcsButton },
     props: {
@@ -75,5 +75,5 @@
         return this.actions.filter(i => !buttonsNames.includes(i.name));
       },
     },
-  });
+  };
 </script>

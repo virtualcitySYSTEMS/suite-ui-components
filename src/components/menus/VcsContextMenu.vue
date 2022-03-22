@@ -106,7 +106,6 @@
 </style>
 
 <script>
-  import Vue from 'vue';
   // TODO check if dependency is required (issue #14)
   // import ClickOutside from 'vue-click-outside';
 
@@ -128,7 +127,7 @@
    *     v-on:menu-closed="clickEvent = undefined"
    *   >
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsContextMenu',
     // directives: { ClickOutside },
     props: {
@@ -239,5 +238,5 @@
         this.showMenu(e);
       },
     },
-  });
+  };
 </script>

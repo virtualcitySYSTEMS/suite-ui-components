@@ -72,7 +72,6 @@
 <script>
   import
   {
-    defineComponent,
     inject,
     onMounted,
     ref,
@@ -92,7 +91,7 @@
    * Injects: ['language', 'tree']
    * Templaate for a treeview leaf, see: https://vuetifyjs.com/en/api/v-treeview/
    */
-  export default defineComponent({
+  export default {
     components: { VcsBadge },
     props: {
       item: {
@@ -166,5 +165,5 @@
         leaf,
       };
     },
-  });
+  };
 </script>

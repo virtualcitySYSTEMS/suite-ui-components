@@ -40,7 +40,6 @@
 }
 </style>
 <script>
-  import Vue from 'vue';
   import { is } from '@vcsuite/check';
   import VcsTooltip from '../buttons/VcsTooltip.vue';
 
@@ -75,7 +74,7 @@
    * @vue-prop {('bottom' | 'left' | 'top' | 'right')}  tooltipPosition - Position of the tooltip.
    * @vue-prop {Object<string, any>}                    tooltipProps - Properties to be passed to VcsTooltip {@link https://vuetifyjs.com/en/api/v-tooltip/#props|vuetify v-tooltip}
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsActionList',
     components: { VcsTooltip },
     props: {
@@ -93,5 +92,5 @@
         default: () => ({}),
       },
     },
-  });
+  };
 </script>

@@ -50,7 +50,6 @@
 
 
 <script>
-  import Vue from 'vue';
 
   /**
    * @description
@@ -64,7 +63,7 @@
    * @vue-prop {Array}   customClasses - Array of strings which will be added as classes.
    * @vue-prop {string}  contentClass - Vuetify content-class which will be applied to the dialog.
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsConfirmationDialog',
     props: {
       open: {
@@ -114,5 +113,5 @@
         this.$emit('on-dialog-close', true);
       },
     },
-  });
+  };
 </script>

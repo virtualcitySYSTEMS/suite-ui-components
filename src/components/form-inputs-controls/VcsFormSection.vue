@@ -19,7 +19,6 @@
 
 
 <script>
-  import Vue from 'vue';
   import VcsActionButtonList from '../buttons/VcsActionButtonList.vue';
 
   /**
@@ -30,7 +29,7 @@
    * @vue-prop {string}   title - Title to be displayed
    * @vue-prop {Array<VcsAction>}    titleActions - Icons to be displayed on the right side
    */
-  export default Vue.extend({
+  export default {
     name: 'VcsFormSection',
     components: { VcsActionButtonList },
     props: {
@@ -43,5 +42,5 @@
         default: () => ([]),
       },
     },
-  });
+  };
 </script>

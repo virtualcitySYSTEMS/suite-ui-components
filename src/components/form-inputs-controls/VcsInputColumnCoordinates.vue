@@ -58,12 +58,11 @@
 </template>
 
 <script>
-  import Vue from 'vue';
   import VcsTextField from './VcsTextField.vue';
 
-  export default Vue.extend({
+  export default {
     components: {
       VcsTextField,
     },
-  });
+  };
 </script>

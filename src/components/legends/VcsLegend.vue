@@ -46,10 +46,10 @@
 </style>
 
 <script>
-  import { defineComponent, ref } from '@vue/composition-api';
+  import { ref } from '@vue/composition-api';
   import { getRootCssValue } from '../../util/index.js';
 
-  export default defineComponent({
+  export default {
     setup(props, vueContext) {
       const value = ref();
       const close = (val) => {
@@ -67,5 +67,5 @@
         value,
       };
     },
-  });
+  };
 </script>
