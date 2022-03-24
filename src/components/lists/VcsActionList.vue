@@ -3,9 +3,8 @@
     v-if="actions.length > 0"
   >
     <v-list-item
-      v-for="action in actions"
-      :key="action.name"
-      :input-value="action.active"
+      v-for="(action, index) in actions"
+      :key="`${action.name}-${index}`"
       active-class="text-active"
       color="primary"
       @click="action.callback($event)"

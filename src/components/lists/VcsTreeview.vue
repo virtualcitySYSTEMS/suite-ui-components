@@ -7,31 +7,20 @@
     />
     <v-treeview
       class="vcs-treeview"
-      :items="items"
       v-bind="{...$props, ...$attrs}"
+      v-on="$listeners"
       expand-icon="mdi-chevron-down"
       :class="{ 'top-level-checkbox-hidden': !topLevelSelectable }"
-      on-icon="$vcsCheckboxChecked"
-      off-icon="$vcsCheckbox"
-      indeterminate-icon="$vcsCheckboxIndeterminate"
-      :item-children="'items'"
+      item-key="name"
       :search="search"
-      @input="handleInput"
       :filter="handleFilter"
-      @update:open="handleUpdateOpen"
-      :open="_open"
+      :activatable="false"
     >
       <template #label="{ item }">
-        <component
-          v-for="component of availableComponents"
-          :key="component"
-          :is="component"
+        <VcsTreeviewLeaf
           :item="item"
-          :id="item.id"
-          :selectable="selectable"
-          :class="[(!item.leaf || (item.leaf && selectable)) ? 'cursor-pointer' : '']"
-          @action-clicked="handleActionClicked"
-          @click.native="handleNodeClick(item)"
+          :class="[item.clickable ? 'cursor-pointer' : '']"
+          @click.native="item.clickable && item.clicked()"
         />
       </template>
     </v-treeview>
@@ -86,18 +75,6 @@
       height: 16px;
       width: 16px;
     }
-
-    .v-list {
-      padding: 4px 0;
-    }
-
-    .v-list-item {
-      min-height: 28px;
-
-      &:not(:last-child) {
-        border-bottom: 1px solid var(--v-accent-base);
-      }
-    }
   }
 
   .vcs-treeview {
@@ -129,6 +106,9 @@
 
       .v-icon.v-icon {
         justify-content: flex-start;
+        &::after{
+          background-color: transparent;
+        }
       }
 
       .v-treeview-node__root::before {
@@ -158,6 +138,7 @@
       > .v-treeview-node {
         > .v-treeview-node__root {
           border-bottom: 1px solid #dedede;
+          padding-left: 0;
 
           > .v-treeview-node__content {
             font-weight: 700;
@@ -185,36 +166,22 @@
 
 
 <script>
-
-  import Vue from 'vue';
   import { inject, ref } from '@vue/composition-api';
   import VcsTreeviewLeaf from './VcsTreeviewLeaf.vue';
   import VcsTreeviewSearchbar from './VcsTreeviewSearchbar.vue';
-
-  Vue.component('TreeviewLeaf', VcsTreeviewLeaf);
 
   /**
    * @description extends API of https://vuetifyjs.com/en/api/v-treeview/
    * Can render dynamic components as leaf items.
    * In order to display an item needs to be registered and added to `availableComponents`.
-   * @vue-prop {Array}   items                - Treeview items
-   * @vue-prop {boolean} hasSearchbar         - Whether there is a searchbar for this treeview
-   * @vue-prop {string}  searchbarPlaceholder - Placeholder text for the searchbar
-   * @vue-prop {boolean} topLevelSelectable   - Whether it should be possible to select branch roots
-   * @vue-event {string} action-clicked       - When an action icon is clicked
-   * @vue-event {string} menu-item-clicked    - When a menu item is clicked
-   * @vue-prop {boolean} selectable           - Whether it should be possible to select items
-   * @vue-event {string[]} value              - List of ids of selected items
-   * @vue-event {string[]} open               - List of ids of open items
+   * @vue-prop {boolean} [hasSearchbar=false] - Whether there is a searchbar for this treeview
+   * @vue-prop {string}  [searchbarPlaceholder] - Placeholder text for the searchbar
+   * @vue-prop {boolean} [topLevelSelectable=false] - Whether it should be possible to select branch roots
    */
   export default {
     name: 'VcsTreeview',
-    components: { VcsTreeviewSearchbar },
+    components: { VcsTreeviewSearchbar, VcsTreeviewLeaf },
     props: {
-      items: {
-        type: Array,
-        default: () => ([]),
-      },
       hasSearchbar: {
         type: Boolean,
         default: false,
@@ -227,46 +194,13 @@
         type: Boolean,
         default: false,
       },
-      selectable: {
-        type: Boolean,
-        default: false,
-      },
-      value: {
-        type: Array,
-        default: () => ([]),
-      },
-      open: {
-        type: Array,
-        default: () => ([]),
-      },
     },
-    setup(props, context) {
+    setup() {
       const search = ref('');
-      const availableComponents = ref(['VcsTreeviewLeaf']);
       const language = inject('language');
+      // TODO properly type the tree view item interface & export in index.d.ts
       /**
-       * @typedef props
-       * @property {boolean} selectable
-       * @property {string[]} open
-       * @property {string[]} value
-       */
-      /** @type {props} */
-      const { open, value, selectable } = props;
-      // eslint-disable-next-line no-underscore-dangle
-      const _open = ref(open);
-      /**
-       * @param {Array<string | Object>} input
-       * @returns {void}
-       */
-      const handleInput = input => context.emit('input', input);
-      const handleActionClicked = input => context.emit('action-clicked', input);
-      /** @param {string[]} openItems */
-      const handleUpdateOpen = (openItems) => {
-        context.emit('update:open', openItems);
-        _open.value = openItems;
-      };
-      /**
-       * @param {AbstractTreeViewItem} treeNode
+       * @param {{ title: string }} treeNode
        * @param {string} q
        * @returns {boolean}
        */
@@ -280,43 +214,10 @@
         }
         return false;
       };
-      /**
-       * @param {Object} obj
-       * @param {boolean} obj.leaf
-       * @param {string | number} obj.id
-       */
-      const handleNodeClick = ({ leaf, id }) => {
-        if (!leaf) {
-          const openIndex = value.indexOf(id);
-          const newValue = [...value];
-          if (openIndex < 0) {
-            newValue.push(id);
-          } else {
-            newValue.splice(openIndex, 1);
-          }
-          context.emit('input', newValue);
-        }
-        if (selectable) {
-          const selectedIndex = _open.value.indexOf(id);
-          const newOpen = [..._open.value];
-          if (selectedIndex < 0) {
-            newOpen.push(id);
-          } else {
-            newOpen.splice(selectedIndex, 1);
-          }
-          _open.value = newOpen;
-          context.emit('update:open', newOpen);
-        }
-      };
+
       return {
         search,
-        availableComponents,
-        handleInput,
-        handleActionClicked,
-        handleUpdateOpen,
         handleFilter,
-        handleNodeClick,
-        _open,
       };
     },
   };

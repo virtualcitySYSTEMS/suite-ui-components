@@ -1,10 +1,9 @@
 <template>
   <div
-    class="d-flex flex-row"
-    :class="{ 'mr-4': selectable && leaf }"
+    class="d-flex flex-row align-center"
     v-if="item"
   >
-    <span class="mr-2" v-if="item.icon">
+    <span v-if="item.icon">
       <v-icon
         v-if="iconType === iconTypes.string"
         v-text="item.icon"
@@ -13,51 +12,17 @@
       <span ref="imgContainer" />
     </span>
 
-    <div class="position-relative">
+    <div class="position-relative col-8 pa-1 mr-4">
       <span>{{ label }}</span>
       <VcsBadge v-if="item.hasUpdate" class="update-badge position-absolute" />
     </div>
-
-    <span v-if="firstTwo && firstTwo.length" class="ml-auto d-flex flex-row justify-center align-center">
-      <v-icon
-        v-for="action of firstTwo"
-        :key="action.title"
-        size="16"
-        @click="(event) => onIconButtonClick(action, event)"
-        class="mr-2"
-        v-text="action.icon"
-      />
-      <v-menu
-        right
-        v-if="remaining && remaining.length"
-        :close-on-content-click="true"
-      >
-        <template #activator="{ on, attrs }">
-          <v-icon
-            v-text="'mdi-dots-vertical'"
-            v-bind="attrs"
-            v-on="on"
-            size="16"
-          />
-        </template>
-
-        <v-list>
-          <v-list-item
-            v-for="(menuItem, index) in remaining"
-            :key="index"
-            @click="() => onMenuItemClick(menuItem)"
-          >
-            <v-icon
-              v-if="menuItem.icon"
-              v-text="menuItem.icon"
-              size="16"
-              class="mr-2"
-            />
-            <v-list-item-title>{{ menuItem.id }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </span>
+    <VcsActionButtonList
+      v-if="item.actions.length > 0"
+      :actions="item.actions"
+      :overflow-count="3"
+      small
+      right
+    />
   </div>
 </template>
 
@@ -72,12 +37,14 @@
 <script>
   import
   {
+    computed,
     inject,
     onMounted,
     ref,
   } from '@vue/composition-api';
 
   import VcsBadge from '../notification/VcsBadge.vue';
+  import VcsActionButtonList from '../buttons/VcsActionButtonList.vue';
 
 
   const iconTypes = {
@@ -88,35 +55,35 @@
 
   /**
    * @description
-   * Injects: ['language', 'tree']
-   * Templaate for a treeview leaf, see: https://vuetifyjs.com/en/api/v-treeview/
+   * Template for a treeview leaf, see: https://vuetifyjs.com/en/api/v-treeview/
    */
   export default {
-    components: { VcsBadge },
+    components: { VcsActionButtonList, VcsBadge },
     props: {
       item: {
         type: Object,
         default: undefined,
       },
-      selectable: {
-        type: Boolean,
-        default: false,
-      },
     },
-    setup(props, context) {
-      const [iconType, imgContainer] = [ref(), ref()];
-      const [language, tree] = [inject('language'), inject('tree')];
+    setup(props) {
+      const iconType = ref();
+      const imgContainer = ref();
+      const language = inject('language');
 
-      const leaf = props.item.children && !props.item.children.length;
-      const firstTwo = props.item.actions && props.item.actions.slice(0, 2);
-      const remaining = props.item.actions &&
-        props.item.actions.length &&
-        props.item.actions.slice(2);
-      const label = (props.item.title && props.item.title[language]) ||
-        props.item.name ||
-        props.item.title;
+      const leaf = computed(() => props.item.children.length === 0);
+      const label = computed(() => {
+        const titleObj = props.item.title;
+        if (titleObj) {
+          if (typeof titleObj === 'string') {
+            return titleObj; // TODO translateable text
+          } else {
+            return titleObj[language]; // TODO translateable text
+          }
+        }
+        return props.item.name;
+      });
 
-      onMounted(() => {
+      onMounted(() => { // TODO make icon reactive
         const { icon } = props.item;
         if (icon) {
           if (icon instanceof HTMLImageElement) {
@@ -133,35 +100,11 @@
         }
       });
 
-      /**
-       * @function
-       * @param {AbstractTreeNode} item
-       * @param {Event} event
-       * @returns {Promise<any>} promise
-       */
-      const onIconButtonClick = async (item, event) => {
-        const action = await item.action(tree.value);
-        // eslint-disable-next-line no-console
-        console.log('Action clicked, ', action);
-        context.emit('action-clicked', { item, event });
-      };
-      /**
-       * @function
-       * @param {string} id
-       */
-      const onMenuItemClick = (id) => {
-        context.emit('menu-item-clicked', id);
-      };
-
       return {
         iconTypes,
         iconType,
-        firstTwo,
-        remaining,
         label,
         imgContainer,
-        onIconButtonClick,
-        onMenuItemClick,
         leaf,
       };
     },

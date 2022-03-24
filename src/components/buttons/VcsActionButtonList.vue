@@ -1,12 +1,12 @@
 <template>
-  <div v-if="actions.length > 0">
+  <div v-if="actions.length > 0" class="d-flex justify-end">
     <VcsButton
-      v-for="button in buttons"
-      :key="button.name"
+      v-for="(button, index) in buttons"
+      :key="`${button.name}-${index}`"
       :tooltip="button.title"
       :icon="button.icon"
       :active="button.active"
-      @click="button.callback($event)"
+      @click.stop="button.callback($event)"
       v-bind="{...$attrs}"
     />
     <v-menu
@@ -67,8 +67,13 @@
       },
     },
     computed: {
+      right() { return this.$attrs.right != null; },
       buttons() {
-        return this.actions.filter(i => i.icon).slice(0, this.overflowCount);
+        const buttons = this.actions.filter(i => i.icon).slice(0, this.overflowCount);
+        if (this.right) {
+          return buttons.reverse();
+        }
+        return buttons;
       },
       overflowButtons() {
         const buttonsNames = this.buttons.map(i => i.name);
