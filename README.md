@@ -1,6 +1,8 @@
 # VCS ui-components
 
-A set of Vue components based on Vuetify.
+> Part of the [VC Map Project](https://github.com/virtualcitySYSTEMS/map-ui)
+
+A set of UI components based on Vuetify.
 
 ## Project setup
 

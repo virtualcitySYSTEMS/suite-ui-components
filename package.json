@@ -11,6 +11,10 @@
     "lint": "eslint \"{src,tests}/**/*.{js,vue}\"",
     "docs": "jsdoc -c build/jsdocConfig.json"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/virtualcitySYSTEMS/vcsuite-ui-components.git"
+  },
   "files": [
     "index.js",
     "src/"
@@ -63,5 +67,9 @@
     "node_modules"
   ],
   "author": "virtualcitysystems GmbH",
-  "license": "ISC"
+  "license": "MIT",
+  "engines": {
+    "node": "^16.14.0",
+    "npm": "^8.3.1"
+  }
 }
