@@ -39,6 +39,7 @@ import LayersIcon from './LayersIcon.vue';
 import LegendIcon from './LegendIcon.vue';
 import LineIcon from './LineIcon.vue';
 import LinkIcon from './LinkIcon.vue';
+import ProgressIcon from './ProgressIcon.vue';
 import MapIcon from './MapIcon.vue';
 import MenuIcon from './MenuIcon.vue';
 import MinusIcon from './MinusIcon.vue';
@@ -222,14 +223,17 @@ const IconMap = {
   layers: {
     component: LayersIcon,
   },
+  legend: {
+    component: LegendIcon,
+  },
   line: {
     component: LineIcon,
   },
   link: {
     component: LinkIcon,
   },
-  legend: {
-    component: LegendIcon,
+  progress: {
+    component: ProgressIcon,
   },
   map: {
     component: MapIcon,
