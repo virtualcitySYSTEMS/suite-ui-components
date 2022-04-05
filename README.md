@@ -10,6 +10,31 @@ A set of UI components based on Vuetify.
     - (select sass dart as css-preprocessor (also added by vuetify))
 2. `vue add vuetify`
 3. `npm i -S @vcsuite/ui-components`
+4. Within your vite config add `src/styles/variables.scss` to css
+```js
+{
+  css: {
+    preprocessorOptions: {
+      sass: {
+        additionalData: "\n@import './node_modules/@vcsuite/ui-components/src/styles/variables.scss'\n"
+      }
+    }
+  }
+}
+```
+5. For hot reload off changes to variables.scss add to your vite config
+```js
+{
+  optimizeDeps: {
+    exclude: ['@vcsuite/ui-components']
+  }
+  server: {
+    watch: {
+      ignored: ['!**/node_modules/@vcsuite/ui-components/**']
+    }
+  }
+}
+```
 
 
 ## Running & Writing Tests
