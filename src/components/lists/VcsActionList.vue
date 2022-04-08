@@ -40,7 +40,7 @@
 </style>
 <script>
   import { is } from '@vcsuite/check';
-  import VcsTooltip from '../buttons/VcsTooltip.vue';
+  import VcsTooltip from '../notification/VcsTooltip.vue';
 
   /**
    * @interface VcsAction

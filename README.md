@@ -36,6 +36,15 @@ A set of UI components based on Vuetify.
 }
 ```
 
+## Styles
+This ui components library comes with an individual style on top of [vuetify](https://vuetifyjs.com), customized by overwriting styles and extended by own style definitions.
+The style is defined on three levels following this order:
+1. [vuetify API](https://vuetifyjs.com/en/api/vuetify/), e.g. make use of properties like `dense, outlined`
+2. [sass](https://sass-lang.com/) variables
+  - overwriting vuetify in [variables.scss](/src/styles/variables.scss)
+  - defining own variables (e.g. [vcsFont.scss](/src/styles/vcsFont.scss)
+3. scoped [css](https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps/What_is_CSS) within single components
+
 
 ## Running & Writing Tests
 To run tests use `npm run test`, or `coverage` for coverage. Tests are run

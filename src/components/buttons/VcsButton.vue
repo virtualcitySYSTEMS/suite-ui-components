@@ -91,7 +91,7 @@
 
 <script>
   import VcsBadge from '../notification/VcsBadge.vue';
-  import VcsTooltip from './VcsTooltip.vue';
+  import VcsTooltip from '../notification/VcsTooltip.vue';
 
   /**
    * @description a button with tooltip extending {@link https://vuetifyjs.com/en/api/v-btn/|vuetify v-btn} using {@link VcsTooltip}.

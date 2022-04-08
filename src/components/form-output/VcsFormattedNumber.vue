@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span class="vcs-formatted-number" :class="{'vcs-formatted-number-dense': dense}">
     {{ formatted }}
     <span v-if="unit === SpecialUnits.SQM">
       m<sup>2</sup>
@@ -15,7 +15,17 @@
     </span>
   </span>
 </template>
-
+<style lang="scss" scoped>
+@import "../../styles/vcsGrid.scss";
+@import "../../styles/vcsFont";
+.vcs-formatted-number {
+  font-size: $base-font-size;
+  line-height: $line-height-base;
+}
+.vcs-formatted-number-dense {
+  line-height: $line-height-dense;
+}
+</style>
 <script>
   import { computed } from '@vue/composition-api';
   import { numberToLocaleString } from '../../filters/locale-string.filter.js';
@@ -40,6 +50,7 @@
    * @vue-prop {string|SpecialUnits} [unit=undefined]
    * @vue-prop {number} [fractionDigits=undefined]
    * @vue-prop {number} value
+   * @vue-prop {boolean} [dense=true] - default line height is 32px (dense). If set false, height is 40px.
    * @vue-computed {string} formatted - value formatted to locale string
    */
   export default {
@@ -56,6 +67,10 @@
       value: {
         type: Number,
         default: 0,
+      },
+      dense: {
+        type: Boolean,
+        default: true,
       },
     },
     setup(props) {

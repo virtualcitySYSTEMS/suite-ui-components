@@ -1,61 +1,81 @@
 <template>
-  <v-select
-    class="vcs-select"
-    :class="[...customClasses]"
-    :items="items"
-    label="Select"
-    append-icon="mdi-chevron-down"
-    hide-details
-    dense
-    solo
-    flat
-    @input="$emit('input', $event)"
-    :style="{ width: `${width}px`, maxWidth: `${width}px` }"
-    :height="height"
-    v-bind="{...$props, ...$attrs}"
-  />
+  <div
+    @mouseover="hover = true"
+    @mouseleave="hover = false"
+  >
+    <VcsTooltip
+      :tooltip-position="tooltipPosition"
+      :tooltip="errorMessage"
+      color="error"
+    >
+      <template #activator="{ on, attrs }">
+        <span v-on="on">
+          <v-select
+            append-icon="mdi-chevron-down"
+            hide-details
+            solo
+            flat
+            :outlined="isOutlined"
+            :dense="$attrs.dense!==false"
+            :height="$attrs.dense ? 24 : 32"
+            v-bind="{...$attrs, ...attrs}"
+            v-on="{...$listeners, ...on}"
+            @update:error="setError"
+          />
+        </span>
+      </template>
+    </VcsTooltip>
+  </div>
 </template>
 <style lang="scss" scoped>
-  .vcs-select ::v-deep {
-    .v-input__control {
-      min-height: 32px !important;
-    }
-  }
+ .v-text-field {
+   padding: 0;
+   margin: 0;
+ }
+
+ .vcs-select-hover{
+   color: var(--v-primary-base) !important;
+ }
 </style>
 <script>
 
+  import VcsTooltip from '../notification/VcsTooltip.vue';
+  import validate from '../notification/validation.js';
+
   /**
-   * @description Stylized wrapper around vuetify select. extends API of https://vuetifyjs.com/en/api/v-select/
-   * @vue-prop  {Array}  items         - Array of strings for selection
-   * @vue-prop  {Array}  customClasses - Array of css classes being applied to select element
-   * @vue-prop  {string} value         - Selected value
-   * @vue-prop  {number} width         - Sets the width of the input
-   * @vue-prop  {number} height        - Sets the height of the input
-   * @vue-event {string} input         - Emit selected value
+   * @description Stylized wrapper around {@link https://vuetifyjs.com/en/api/v-select/ |vuetify select}.
+   * Provides two height options depending on "dense" property:
+   * - if dense is set true (default), height is 24 px
+   * - if dense is set false, height is 32 px
+   * Provides VcsTooltip to show error messages
+   * @vue-prop {('bottom' | 'left' | 'top' | 'right')}  [tooltipPosition='right'] - Position of the error tooltip.
+   * @vue-computed {boolean} isOutlined - Select is outlined on either hover, focus or error, if not disabled.
    */
   export default {
     name: 'VcsSelect',
+    components: { VcsTooltip },
     props: {
-      items: {
-        type: Array,
-        default: () => ([]),
-        required: true,
-      },
-      customClasses: {
-        type: Array,
-        default: () => ([]),
-      },
-      value: {
+      tooltipPosition: {
         type: String,
-        default: undefined,
+        default: 'right',
       },
-      width: {
-        type: Number,
-        default: undefined,
+    },
+    data() {
+      return {
+        hover: false,
+        errorMessage: '',
+      };
+    },
+    computed: {
+      isOutlined() {
+        return (this.hover || this.errorMessage.length > 0) &&
+          !(this.$attrs.disabled || this.$attrs.disabled === '');
       },
-      height: {
-        type: Number,
-        default: 32,
+    },
+    methods: {
+      setError() {
+        const rules = [...this.$attrs.rules].concat(this.$attrs.errorMessages);
+        this.errorMessage = validate(rules, this.$attrs.value).join('\n');
       },
     },
   };

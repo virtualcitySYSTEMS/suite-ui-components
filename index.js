@@ -4,10 +4,11 @@ export { numberToLocaleString } from './src/filters/locale-string.filter.js';
 
 export { default as VcsButton } from './src/components/buttons/VcsButton.vue';
 export { default as VcsActionButtonList } from './src/components/buttons/VcsActionButtonList.vue';
-export { default as VcsTooltip } from './src/components/buttons/VcsTooltip.vue';
+export { default as VcsTooltip } from './src/components/notification/VcsTooltip.vue';
 
 // export { default as VcsConfirmationDialog } from './src/components/dialogs/VcsConfirmationDialog.vue';
 
+export { default as VcsLabel } from './src/components/form-inputs-controls/VcsLabel.vue';
 export { default as VcsCheckbox } from './src/components/form-inputs-controls/VcsCheckbox.vue';
 // export { default as VcsColorPicker } from './src/components/form-inputs-controls/VcsColorPicker.vue';
 export { default as VcsFormSection } from './src/components/form-inputs-controls/VcsFormSection.vue';
