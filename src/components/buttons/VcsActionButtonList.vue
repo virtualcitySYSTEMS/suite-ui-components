@@ -1,5 +1,5 @@
 <template>
-  <div v-if="actions.length > 0" class="d-flex justify-end">
+  <div v-if="actions.length > 0" class="d-flex justify-end action-btn-wrap">
     <VcsButton
       v-for="(button, index) in buttons"
       :key="`${button.name}-${index}`"
@@ -26,11 +26,15 @@
       </template>
       <VcsActionList :actions="overflowButtons" />
     </v-menu>
+    <v-spacer v-else-if="blockOverflow" class="flex-grow-0 d-inline-block px-2" />
   </div>
 </template>
 <style lang="scss">
 .vcs-overflow-menu-wrap{
   margin-left: 13px;
+}
+.action-btn-wrap{
+  gap: 8px;
 }
 </style>
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-inline-block vcs-button-wrap"
+    class="d-flex vcs-button-wrap"
   >
     <VcsTooltip
       :tooltip="tooltip"
@@ -26,7 +26,7 @@
     <VcsBadge
       v-if="hasUpdate"
       :color="'warning'"
-      class="position-absolute pos-t-0 pos-r-0"
+      class="position-absolute"
     />
   </div>
 </template>
@@ -34,10 +34,12 @@
 <style lang="scss" scoped>
   .vcs-button-wrap{
     position: relative;
-    padding: 3px;
+  }
+  .badge{
+    top: -3px;
+    right: -3px;
   }
   .v-btn{
-    border: 1px solid transparent;
     &--outlined{
       border: thin solid currentColor;
     }
@@ -47,6 +49,7 @@
         min-width: 48px;
         height: 32px;
         font-size: 12px;
+        border: 1px solid transparent;
         &:hover{
           color: var(--v-accent-lighten5) !important;
           border-color: var(--v-primary-base);
