@@ -2,29 +2,32 @@
   <v-list
     v-if="actions.length > 0"
   >
-    <v-list-item
+    <VcsTooltip
       v-for="(action, index) in actions"
       :key="`${action.name}-${index}`"
-      active-class="text-active"
-      color="primary"
-      @click="action.callback($event)"
+      :tooltip="action.title"
+      :tooltip-position="tooltipPosition"
+      v-bind="{...tooltipProps}"
     >
-      <VcsTooltip
-        :tooltip="action.title"
-        :tooltip-position="tooltipPosition"
-        v-bind="{...tooltipProps}"
-      >
-        <template #activator="{ on, attrs }">
+      <template #activator="{ on, attrs }">
+        <v-list-item
+          active-class="text-active"
+          color="primary"
+          @click="action.callback($event)"
+          v-bind="{...$attrs, ...attrs}"
+          v-on="{...$listeners, ...on}"
+        >
+          <v-list-item-icon v-if="showIcon && action.icon">
+            <v-icon v-text="action.icon" small />
+          </v-list-item-icon>
           <v-list-item-content
             class="vcs-action-list"
-            v-bind="{...$attrs, ...attrs}"
-            v-on="{...$listeners, ...on}"
           >
             <v-list-item-title v-text="action.name" />
           </v-list-item-content>
-        </template>
-      </VcsTooltip>
-    </v-list-item>
+        </v-list-item>
+      </template>
+    </VcsTooltip>
   </v-list>
 </template>
 <style lang="scss">
@@ -72,6 +75,7 @@
    * @vue-prop {Array<VcsAction>} actions - Array of actions
    * @vue-prop {('bottom' | 'left' | 'top' | 'right')}  tooltipPosition - Position of the tooltip.
    * @vue-prop {Object<string, any>}                    tooltipProps - Properties to be passed to VcsTooltip {@link https://vuetifyjs.com/en/api/v-tooltip/#props|vuetify v-tooltip}
+   * @vue-prop {boolean}                                [showIcon=false] - Whether list item icons should be displayed.
    */
   export default {
     name: 'VcsActionList',
@@ -89,6 +93,10 @@
       tooltipProps: {
         type: Object,
         default: () => ({}),
+      },
+      showIcon: {
+        type: Boolean,
+        default: false,
       },
     },
   };
