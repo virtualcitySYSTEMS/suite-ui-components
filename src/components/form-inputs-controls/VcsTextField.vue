@@ -14,7 +14,7 @@
         <v-text-field
           ref="textFieldRef"
           hide-details
-          :dense="$attrs.dense!==false"
+          :dense="isDense"
           :clearable="isClearable"
           @focus="focus = true"
           @blur="focus = neverBlurred = false"
@@ -22,7 +22,7 @@
           :outlined="isOutlined"
           v-bind="{...$attrs, ...attrs}"
           v-on="{...$listeners}"
-          :height="$attrs.dense ? 24 : 32"
+          :height="isDense ? 24 : 32"
           class="ma-0 pb-1 pt-1"
         />
       </template>
@@ -47,6 +47,7 @@
    * - show tooltips, if supplied, when hovered over append-icon
    * @vue-prop {('bottom' | 'left' | 'top' | 'right')}  [tooltipPosition='right'] - Position of the error tooltip.
    * @vue-computed {boolean}                            isClearable - Whether textfield is isClearable. Makes sure icon is only shown on focus, hover or error.
+   * @vue-computed {boolean}                            isDense - Whether size of textfield is dense.
    * @vue-computed {boolean}                            isError - Whether errorBucket is not empty and textfield was focused at least once.
    * @vue-computed {boolean}                            isOutlined - Textfield is outlined on either hover, focus or error, if not disabled.
    * @vue-computed {Array<string>}                      joinedErrorBucket - errorBucket + errorMessages of child v-text-field.
@@ -74,8 +75,11 @@
     },
     computed: {
       isClearable() {
-        // eslint-disable-next-line no-prototype-builtins
-        return !!this.$attrs.hasOwnProperty('clearable') && (this.hover || this.focus || this.isError);
+        return (this.$attrs.clearable !== undefined && this.$attrs.clearable !== false) &&
+          (this.hover || this.focus || this.isError);
+      },
+      isDense() {
+        return this.$attrs.dense !== undefined && this.$attrs.dense !== false;
       },
       isError() {
         return this.joinedErrorBucket.length > 0 && (this.firstInput || !this.neverBlurred);

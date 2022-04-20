@@ -13,7 +13,7 @@
           :text="isTextButton"
           :outlined="isOutlined"
           :class="classes"
-          :ripple="!isSmall"
+          :ripple="!isSmall ? { class: 'primary--text text--darken-4' } : false"
           elevation="0"
           v-bind="{...$attrs, ...attrs}"
           v-on="{...$listeners, ...on}"

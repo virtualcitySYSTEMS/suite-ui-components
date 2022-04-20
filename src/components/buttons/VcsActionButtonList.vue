@@ -71,7 +71,7 @@
       },
     },
     computed: {
-      right() { return this.$attrs.right != null; },
+      right() { return this.$attrs.right !== undefined && this.$attrs.right !== false; },
       buttons() {
         const buttons = this.actions.filter(i => i.icon).slice(0, this.overflowCount);
         if (this.right) {

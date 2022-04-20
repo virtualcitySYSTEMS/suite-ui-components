@@ -16,8 +16,8 @@
             solo
             flat
             :outlined="isOutlined"
-            :dense="$attrs.dense!==false"
-            :height="$attrs.dense ? 24 : 32"
+            :dense="isDense"
+            :height="isDense ? 24 : 32"
             v-bind="{...$attrs, ...attrs}"
             v-on="{...$listeners, ...on}"
             @update:error="setError"
@@ -49,6 +49,7 @@
    * - if dense is set false, height is 32 px
    * Provides VcsTooltip to show error messages
    * @vue-prop {('bottom' | 'left' | 'top' | 'right')}  [tooltipPosition='right'] - Position of the error tooltip.
+   * @vue-computed {boolean} isDense - Whether size of select is dense.
    * @vue-computed {boolean} isOutlined - Select is outlined on either hover, focus or error, if not disabled.
    */
   export default {
@@ -67,6 +68,9 @@
       };
     },
     computed: {
+      isDense() {
+        return this.$attrs.dense !== undefined && this.$attrs.dense !== false;
+      },
       isOutlined() {
         return (this.hover || this.errorMessage.length > 0) &&
           !(this.$attrs.disabled || this.$attrs.disabled === '');
