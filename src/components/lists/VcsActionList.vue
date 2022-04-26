@@ -11,7 +11,7 @@
     >
       <template #activator="{ on, attrs }">
         <v-list-item
-          active-class="text-active"
+          :class="action.active ? 'primary--text' : ''"
           color="primary"
           @click="action.callback($event)"
           v-bind="{...$attrs, ...attrs}"
@@ -36,9 +36,6 @@
   &:hover{
     color: var(--v-primary-base);
   }
-}
-.v-list-item--active.text-active::before {
-  opacity: 0;
 }
 </style>
 <script>
