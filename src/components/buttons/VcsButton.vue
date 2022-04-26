@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-flex vcs-button-wrap"
+    class="vcs-button-wrap"
   >
     <VcsTooltip
       :tooltip="tooltip"
@@ -34,6 +34,7 @@
 <style lang="scss" scoped>
   .vcs-button-wrap{
     position: relative;
+    display: inline-block;
   }
   .badge{
     top: -3px;

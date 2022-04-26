@@ -1,6 +1,7 @@
 <template>
-  <div v-if="actions.length > 0" class="d-flex justify-end action-btn-wrap">
+  <div v-if="actions.length > 0" class="d-flex align-center justify-end action-btn-wrap">
     <VcsButton
+      class="d-flex"
       v-for="(button, index) in buttons"
       :key="`${button.name}-${index}`"
       :tooltip="button.title"
@@ -13,13 +14,14 @@
       v-if="overflowButtons.length > 0"
       content-class="vcs-overflow-menu-wrap"
       max-width="none"
+      :nudge-right=13
       offset-x
     >
       <template #activator="{ on, attrs }">
         <VcsButton
           v-bind="{...$attrs, ...attrs}"
           v-on="on"
-          class="vcs-overflow-btn"
+          class="d-flex"
         >
           <v-icon v-text="overflowIcon" />
         </VcsButton>
@@ -30,9 +32,6 @@
   </div>
 </template>
 <style lang="scss">
-.vcs-overflow-menu-wrap{
-  margin-left: 13px;
-}
 .action-btn-wrap{
   gap: 8px;
 }
@@ -49,6 +48,7 @@
    * @vue-prop {Array<VcsAction>} actions - Array of actions
    * @vue-prop {number} [overflowCount=2] - number of buttons rendered until overflow.
    * @vue-prop {string} [overflowIcon='$vcsKebab'] - optional custom icon for overflow button
+   * @vue-prop {boolean} [blockOverflow=false] - if space for the overflow should be blocked or not (e.g. when rendering lists in a grid)
    * @vue-computed {Array<VcsAction>} buttons - buttons rendered directly, have to provide an icon
    * @vue-computed {Array<VcsAction>} overflowButtons - rest of buttons rendered in overflow
    */
@@ -68,6 +68,10 @@
       overflowIcon: {
         type: String,
         default: '$vcsKebab',
+      },
+      blockOverflow: {
+        type: Boolean,
+        default: false,
       },
     },
     computed: {

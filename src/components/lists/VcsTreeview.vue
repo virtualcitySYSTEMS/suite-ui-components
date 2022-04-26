@@ -10,7 +10,6 @@
       v-bind="{...$props, ...$attrs}"
       v-on="$listeners"
       expand-icon="mdi-chevron-down"
-      :class="{ 'top-level-checkbox-hidden': !topLevelSelectable }"
       item-key="name"
       :search="search"
       :filter="handleFilter"
@@ -26,144 +25,34 @@
     </v-treeview>
   </div>
 </template>
-
-
 <style lang="scss" scoped>
-
-  .search-icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 12px;
-  }
-
-  .update-badge {
-    top: 50%;
-    transform: translateY(-50%) translateX(8px);
-  }
-
+.vcs-treeview {
   ::v-deep {
-    .v-application--is-ltr .v-treeview-node__content {
-      margin-left: 0;
+    // Root Level Entries should be 40px high
+    > .v-treeview-node > .v-treeview-node__root {
+      min-height: 40px;
     }
-
-    .v-treeview-node__root {
-      position: relative;
+    // Border around root nodes with children included
+    > .v-treeview-node {
+      border-bottom: 1px solid var(--v-gray-200-base);
     }
-
-    .v-treeview-node__checkbox {
-      position: absolute;
-      right: 8px;
+    // Only Root Entries have a bold font
+    > .v-treeview-node > .v-treeview-node__root > .v-treeview-node__content > .v-treeview-node__label {
+      font-weight: 700;
     }
-
-    .v-treeview-node__prepend {
-      min-width: 0;
-
-      &:empty {
-        display: none;
+    // remove ripple effect from expand icon
+    .v-icon.v-icon {
+      &::after{
+        background-color: transparent;
       }
     }
-    // Hides Checkboxes from top-level
-    .top-level-checkbox-hidden {
-      .v-treeview-node__toggle + button.v-treeview-node__checkbox {
-        display: none !important;
-      }
-    }
-
-    .v-treeview-node__checkbox,
-    .v-input--dense .v-input--selection-controls__input {
-      height: 16px;
+    // Toggle Item Chevron with should be 16px
+    .v-treeview-node__toggle {
       width: 16px;
     }
   }
-
-  .vcs-treeview {
-    ::v-deep {
-      .v-treeview-node--disabled {
-        .v-treeview-node__toggle {
-          color: rgba(0, 0, 0, 0.38) !important;
-        }
-      }
-
-      .v-treeview-node__label {
-        white-space: pre-line;
-        line-height: 1.2;
-        overflow: unset;
-        text-overflow: unset;
-      }
-
-      .v-treeview-node__root.v-treeview-node--active::before {
-        opacity: 1 !important;
-      }
-
-      .v-input--selection-controls {
-        margin-top: 0;
-      }
-
-      .v-input--selection-controls__input {
-        margin-right: 0;
-      }
-
-      .v-icon.v-icon {
-        justify-content: flex-start;
-        &::after{
-          background-color: transparent;
-        }
-      }
-
-      .v-treeview-node__root::before {
-        width: 3px;
-      }
-
-      .v-treeview-node__append {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: center;
-
-        .v-input__slot {
-          margin: 0;
-        }
-
-        .v-input--selection-controls {
-          margin-top: 0;
-          padding-top: 0;
-        }
-      }
-
-      .v-treeview-node__level {
-        width: 12px;
-      }
-
-      > .v-treeview-node {
-        > .v-treeview-node__root {
-          border-bottom: 1px solid #dedede;
-          padding-left: 0;
-
-          > .v-treeview-node__content {
-            font-weight: 700;
-          }
-        }
-
-        > .v-treeview-node__children {
-          .v-treeview-node__root {
-            border-bottom: none;
-          }
-
-          .v-treeview-node__content {
-            font-size: 12px;
-            padding: 4px 0;
-          }
-
-          .v-treeview-node--leaf .v-treeview-node__root {
-            min-height: 32px;
-          }
-        }
-      }
-    }
-  }
+}
 </style>
-
 
 <script>
   import { inject, ref } from '@vue/composition-api';
@@ -176,7 +65,6 @@
    * In order to display an item needs to be registered and added to `availableComponents`.
    * @vue-prop {boolean} [hasSearchbar=false] - Whether there is a searchbar for this treeview
    * @vue-prop {string}  [searchbarPlaceholder] - Placeholder text for the searchbar
-   * @vue-prop {boolean} [topLevelSelectable=false] - Whether it should be possible to select branch roots
    */
   export default {
     name: 'VcsTreeview',
@@ -189,10 +77,6 @@
       searchbarPlaceholder: {
         type: String,
         default: undefined,
-      },
-      topLevelSelectable: {
-        type: Boolean,
-        default: false,
       },
     },
     setup() {

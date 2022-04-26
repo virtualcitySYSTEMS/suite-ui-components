@@ -3,7 +3,7 @@ $font-size: 14px;
 $font-size-root: 14px;
 
 // input font and icon
-$input-font-size: 14px;
+$input-font-size: $font-size;
 $input-icon-height: 16px; // 24px !default;
 $input-icon-width: 16px; // 24px !default;
 $input-icon-min-width: 16px; // 24px !default;
@@ -48,8 +48,8 @@ $select-dense-selections-margin: 4px 4px 3px 0; // 5px 4px 3px 0 !default;
 
 // list box
 $list-padding: 0 0; // 8px 0 !default;
-$list-item-title-font-size: 14px; // map-deep-get($headings, 'subtitle-1', 'size') !default;
-$list-item-dense-title-font-size: 14px; // 0.8125rem !default;
+$list-item-title-font-size: $font-size; // map-deep-get($headings, 'subtitle-1', 'size') !default;
+$list-item-dense-title-font-size: $font-size; // 0.8125rem !default;
 $list-item-dense-title-line-height: 24px; // 1rem !default;
 $list-item-min-height: 32px; // 48px !default;
 $list-dense-min-height: 24px; // 40px !default;
@@ -58,3 +58,9 @@ $list-dense-content-padding: 0 0; // 8px 0 !default;
 $list-item-action-icon-margin: 0 0; //32px !default;
 $list-item-action-margin: 0 0; // 12px 0 !default;
 $list-item-icon-margin: auto 0; // 16px 0 !default;
+
+
+/** Treeview **/
+$treeview-node-level-width: 16px;
+$treeview-node-margin: 4px;
+$treeview-node-height: 32px; // 48px !default;

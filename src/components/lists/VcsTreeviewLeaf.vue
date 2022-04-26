@@ -3,36 +3,30 @@
     class="d-flex flex-row align-center"
     v-if="item"
   >
-    <span v-if="item.icon">
+    <span v-if="item.icon" class="d-flex align-center">
       <v-icon
         v-if="iconType === iconTypes.string"
         v-text="item.icon"
         :size="16"
+        class="mr-1"
       />
       <span ref="imgContainer" />
     </span>
 
-    <div class="position-relative col-8 pa-1 mr-4">
+    <div class="position-relative col-8 pa-0 d-flex align-center">
       <span>{{ label }}</span>
-      <VcsBadge v-if="item.hasUpdate" class="update-badge position-absolute" />
     </div>
     <VcsActionButtonList
       v-if="item.actions.length > 0"
       :actions="item.actions"
+      :block-overflow="true"
       :overflow-count="3"
       small
       right
+      class="col-4 pa-0 d-flex align-center"
     />
   </div>
 </template>
-
-<style lang="scss">
-  .update-badge {
-    right: -16px;
-    bottom: 50%;
-    transform: translateY(50%);
-  }
-</style>
 
 <script>
   import
@@ -43,7 +37,6 @@
     ref,
   } from '@vue/composition-api';
 
-  import VcsBadge from '../notification/VcsBadge.vue';
   import VcsActionButtonList from '../buttons/VcsActionButtonList.vue';
 
 
@@ -58,7 +51,7 @@
    * Template for a treeview leaf, see: https://vuetifyjs.com/en/api/v-treeview/
    */
   export default {
-    components: { VcsActionButtonList, VcsBadge },
+    components: { VcsActionButtonList },
     props: {
       item: {
         type: Object,
