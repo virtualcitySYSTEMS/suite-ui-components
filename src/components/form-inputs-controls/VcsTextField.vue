@@ -23,7 +23,8 @@
           v-bind="{...$attrs, ...attrs}"
           v-on="{...$listeners}"
           :height="isDense ? 24 : 32"
-          class="ma-0 pb-1 pt-1"
+          class="ma-0 pb-1 pt-1 primary--placeholder"
+          :class="$attrs.color === 'primary' ? 'primary--textfield' : ''"
         />
       </template>
     </VcsTooltip>
@@ -31,7 +32,22 @@
 </template>
 
 <style lang="scss" scoped>
-
+.primary--placeholder {
+  ::v-deep {
+    input::placeholder {
+      color: var(--v-primary-base);
+      font-style: italic;
+      opacity: 1;
+    }
+  }
+}
+.primary--textfield {
+  ::v-deep {
+    input {
+      color: var(--v-primary-base);
+    }
+  }
+}
 </style>
 
 <script>

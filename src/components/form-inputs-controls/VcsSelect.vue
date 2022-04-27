@@ -13,11 +13,11 @@
           <v-select
             append-icon="mdi-chevron-down"
             hide-details
-            solo
             flat
             :outlined="isOutlined"
             :dense="isDense"
             :height="isDense ? 24 : 32"
+            :class="$attrs.color === 'primary' ? 'primary--select' : ''"
             v-bind="{...$attrs, ...attrs}"
             v-on="{...$listeners, ...on}"
             @update:error="setError"
@@ -35,6 +35,16 @@
 
  .vcs-select-hover{
    color: var(--v-primary-base) !important;
+ }
+
+ .primary--select {
+   ::v-deep {
+     .v-select__selection,
+     .v-select__selection--comma,
+     .v-select.v-text-field input {
+       color: var(--v-primary-base);
+     }
+   }
  }
 </style>
 <script>
