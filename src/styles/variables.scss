@@ -38,6 +38,10 @@ $text-field-outlined-dense-label-position-y: -10px;
 $text-field-label-top: 2px; // 6px !default;
 $text-field-label-active-transform: translateY(-14px) scale(.75); //translateY(-18px) scale(.75) !default;
 
+/** VcsTextarea **/
+$textarea-box-enclosed-single-outlined-margin-top: 0px; // 10px !default;
+$textarea-dense-box-enclosed-single-outlined-margin-top: 0px; // 6px !default;
+
 /** VcsCheckbox **/
 $icon-size: 20px; // 24px !default;
 $icon-size-dense: 16px; // 20px !default;
