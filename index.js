@@ -21,7 +21,7 @@ export { default as VcsTextArea } from './src/components/form-inputs-controls/Vc
 
 export { default as VcsFormattedNumber } from './src/components/form-output/VcsFormattedNumber.vue';
 
-export { default as VcsActionList } from './src/components/lists/VcsActionList.vue';
+export { default as VcsActionList, validateActions } from './src/components/lists/VcsActionList.vue';
 // export { default as VcsEndlessList } from './src/components/lists/VcsEndlessList.vue';
 export { default as VcsTreeview } from './src/components/lists/VcsTreeview.vue';
 export { default as VcsTreeviewLeaf } from './src/components/lists/VcsTreeviewLeaf.vue';

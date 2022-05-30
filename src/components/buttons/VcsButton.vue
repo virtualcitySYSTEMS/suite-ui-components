@@ -173,7 +173,7 @@
         };
       },
       hasDefaultSlot() {
-        return !!this.$slots.default && !!this.$slots.default[0].text.trim();
+        return !!this.$slots?.default?.[0]?.text?.trim();
       },
       isSmall() {
         return this.$attrs.small != null;
